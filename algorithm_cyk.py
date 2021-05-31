@@ -1,8 +1,8 @@
 def ler_gramatica():
     with open('grammar.txt', 'r') as gramatica:
         regras = gramatica.read().splitlines()
-        regras_terminais = []
-        regras_variaveis = []
+        terminais = []
+        variaveis = []
 
         for linha in regras:
             lado_esquerdo, lado_direito = linha.split(" => ")
@@ -10,11 +10,11 @@ def ler_gramatica():
 
             for letra in lado_direito:
                 if(str.islower(letra)):
-                    regras_terminais.append([lado_esquerdo, letra])
+                    terminais.append([lado_esquerdo, letra])
                 else:
-                    regras_variaveis.append([lado_esquerdo, letra])
+                    variaveis.append([lado_esquerdo, letra])
 
-        return regras_variaveis, regras_terminais
+        return variaveis, terminais
 
 
 def cyk(variaveis, terminais, entrada):
@@ -34,12 +34,11 @@ def cyk(variaveis, terminais, entrada):
         for coluna_atual in range(tamanho_entrada - linha_atual):
             for k in range(linha_atual):
                 if (tabela[k][coluna_atual] and tabela[linha_atual-1 -k][coluna_atual+1 +k]): 
-                    combinacoes = set() 
-                    for variavel1 in tabela[k][coluna_atual]:
+                    combinacoes = set() # set() = lista que não repete valores
+                    for variavel1 in tabela[k][coluna_atual]: 
                         for variavel2 in tabela[linha_atual-1 -k][coluna_atual+1 +k]: 
                             combinacoes.add(variavel1 + variavel2) 
                             
-
                     for combinacao in combinacoes:
                         if combinacao in variaveis_direita:
                             tabela[linha_atual][coluna_atual].add(
@@ -53,6 +52,6 @@ def cyk(variaveis, terminais, entrada):
 
 
 
-r_variaveis, r_terminais = ler_gramatica()
+variaveis, terminais = ler_gramatica()
 palavra = input("Escreva uma palavra:\n")
-teste = cyk(r_variaveis, r_terminais, palavra)
+teste = cyk(variaveis, terminais, palavra)
