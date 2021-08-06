@@ -2,7 +2,7 @@
 
 Implementação de um reconhecedor de palavras utilizando o algoritmo CYK.
 
-O algoritmo consiste na verificação de palavras para descobrir se essa palavra pertence ou não a uma determinada gramática. Ele verefica palavras que contenham a mesma quantidade de a's e b's.
+O algoritmo consiste na verificação de palavras para descobrir se essa palavra pertence ou não a uma determinada gramática. Ele verifica palavras que contenham a mesma quantidade de a's e b's.
 
 A aplicação necessita fazer a leitura do arquivo grammar.txt.
 
